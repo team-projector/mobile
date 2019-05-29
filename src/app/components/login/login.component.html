@@ -1,0 +1,17 @@
+<FlexboxLayout class="page">
+    <StackLayout class="form">
+        <Image class="logo" src="~/images/logo.png"></Image>
+        <Label class="header" text="Team Projector"></Label>
+
+        <StackLayout class="input-field">
+            <TextField hint="Login" [(ngModel)]="credentials.login"></TextField>
+        </StackLayout>
+
+        <StackLayout class="input-field">
+            <TextField hint="Password" [(ngModel)]="credentials.password"></TextField>
+        </StackLayout>
+
+        <Button [text]="'Log In'" (tap)="login()"></Button>
+        <Button [text]="'Log In with Gitlab'" (tap)="gitlab()"></Button>
+    </StackLayout>
+</FlexboxLayout>
