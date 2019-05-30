@@ -138,6 +138,20 @@ export class IssueCard {
 }
 
 @Model()
+export class WorkingIssue {
+    @Field()
+    id: number;
+    @Field()
+    start: string;
+
+    constructor(defs: WorkingIssue = null) {
+        if (!!defs) {
+            Object.assign(this, defs);
+        }
+    }
+}
+
+@Model()
 export class PagingIssues implements Paging<IssueCard> {
 
     @Field()

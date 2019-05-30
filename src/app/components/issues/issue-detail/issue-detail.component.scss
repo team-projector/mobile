@@ -1,1 +1,27 @@
-/* Add mobile styles for the component here.  */
+[loading] {
+  width: 200;
+  height: 200;
+  color: lightgray;
+}
+
+[page] {
+  padding: 10;
+
+  [label] {
+    font-family: "FontAwesome 5 Free", "fa-regular-400", "fa-solid-900";
+    font-size: 20;
+  }
+
+  [actions] {
+    padding: 10;
+
+    [play], [stop] {
+      width: 140;
+      height: 140;
+      border-radius: 100;
+      font-family: "FontAwesome 5 Free", "fa-regular-400", "fa-solid-900";
+      font-size: 90;
+      vertical-align: middle;
+    }
+  }
+}

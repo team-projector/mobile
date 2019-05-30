@@ -1,4 +1,18 @@
-<ActionBar title="Issue detail" class="action-bar"></ActionBar>
+<ActionBar [title]="loading ? 'Loading...' : issue?.title" class="action-bar"></ActionBar>
 
-<!--<Label [text]="issue?.title"></Label>-->
-<Label text="Lorem Ipsum"></Label>
+<flexbox-layout horizontalAlignment="center" verticalAlignment="center">
+    <ActivityIndicator [busy]="loading" class="activity-indicator" loading></ActivityIndicator>
+</flexbox-layout>
+
+<StackLayout *ngIf="!!issue" orientation="vertical" page>
+    <Label [text]="'Time spent: ' + ((issue.timeSpent | duration) || '&#xf254;')" label></Label>
+    <Label [text]="'Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')" label></Label>
+
+    <FlexboxLayout flexDirection="column" horizontalAlignment="center" verticalAlignment="top" actions>
+        <Label *ngIf="!!working" [text]="working.start | diff:now | duration" label></Label>
+        <Button *ngIf="!playing; else stopTemp" text="&#xf144;" horizontalAlignment="center" (tap)="play()" play></Button>
+        <ng-template #stopTemp>
+            <Button text="&#xf28d;" horizontalAlignment="center" (tap)="stop()" stop></Button>
+        </ng-template>
+    </FlexboxLayout>
+</StackLayout>

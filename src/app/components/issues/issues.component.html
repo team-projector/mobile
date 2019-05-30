@@ -3,8 +3,9 @@
 <ScrollView orientation="vertical">
     <ListView class="list-group" [items]="issues" (itemTap)="select($event)">
         <ng-template let-issue="item">
-            <FlexboxLayout flexDirection="row" class="list-group-item">
+            <FlexboxLayout flexDirection="row" justifyContent="space-between" class="list-group-item">
                 <Label [text]="issue['title']"></Label>
+                <Label *ngIf="!!issuesManager.get(issue['id'])" text="&#xf144;" working></Label>
             </FlexboxLayout>
         </ng-template>
     </ListView>
