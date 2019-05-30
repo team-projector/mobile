@@ -13,8 +13,8 @@ export class AppConfig {
     version = APP_VERSION;
 
     authorization$ = new BehaviorSubject<Authorization>((() => {
-        if (!!localStorage[AUTHORIZATION_KEY]) {
-            return JSON.parse(localStorage[AUTHORIZATION_KEY]) as Authorization;
+        if (!!localStorage.getItem(AUTHORIZATION_KEY)) {
+            return JSON.parse(localStorage.getItem(AUTHORIZATION_KEY)) as Authorization;
         }
 
         return null;

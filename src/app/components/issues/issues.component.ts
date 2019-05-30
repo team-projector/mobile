@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular';
 import { ios } from 'tns-core-modules/application';
 import { ItemEventData } from 'tns-core-modules/ui/list-view';
+import { IssuesManager } from '~/app/managers/issues.manager';
 import { MeManager } from '~/app/managers/me.manager';
 import { IssueCard, IssuesFilter } from '~/app/models/issue';
 import { Me } from '~/app/models/me';
@@ -22,6 +23,7 @@ export class IssuesComponent implements OnInit {
     constructor(private issuesService: IssuesService,
                 private router: RouterExtensions,
                 private route: ActivatedRoute,
+                public issuesManager: IssuesManager,
                 public me: MeManager) {
     }
 
@@ -38,7 +40,7 @@ export class IssuesComponent implements OnInit {
     }
 
     select(item: ItemEventData): void {
-        this.router.navigate([item.index], {
+        this.router.navigate([this.issues[item.index].id], {
             relativeTo: this.route,
             animated: true,
             transition: {
