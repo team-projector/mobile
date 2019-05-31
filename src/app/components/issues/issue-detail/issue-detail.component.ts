@@ -20,6 +20,7 @@ export class IssueDetailComponent implements OnInit {
     issue: Issue;
     loading = false;
     now = new Date();
+    dialogOpen = false;
 
     set id(id: number) {
         this._id = id;
@@ -66,12 +67,6 @@ export class IssueDetailComponent implements OnInit {
     stop(): void {
         this.working = null;
         this.issuesManager.stop(this.id);
-    }
-
-    toList(): void {
-        this.router.navigate(['/issues'], {
-            animated: true,
-            transition: {name: 'slideRight', duration: 200, curve: 'easeIn'}
-        });
+        this.dialogOpen = false;
     }
 }

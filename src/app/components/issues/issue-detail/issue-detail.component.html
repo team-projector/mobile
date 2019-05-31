@@ -2,9 +2,9 @@
     <ActivityIndicator [busy]="loading" class="activity-indicator" loading></ActivityIndicator>
 </FlexboxLayout>
 
-<StackLayout>
-    <Label [text]="issue?.title" title></Label>
-    <StackLayout *ngIf="!!issue" orientation="vertical" detail>
+<GridLayout class="page" [class.dialogOpen]="dialogOpen">
+    <StackLayout *ngIf="!!issue" orientation="vertical" content>
+        <Label [text]="issue.title" title></Label>
         <Label [text]="'$ Time spent: ' + ((issue.timeSpent | duration) || '&#xf068;')" class="fa label">
         </Label>
         <Label [text]="'&#xf254; Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')"
@@ -18,8 +18,19 @@
                     class="fa play">
             </Button>
             <ng-template #stopTemp>
-                <Button text="&#xf04d;" horizontalAlignment="center" (tap)="stop()" class="fa stop"></Button>
+                <Button text="&#xf04d;" horizontalAlignment="center" (tap)="this.dialogOpen = true"
+                        class="fa stop">
+                </Button>
             </ng-template>
         </FlexboxLayout>
     </StackLayout>
-</StackLayout>
+
+    <AbsoluteLayout class="dialog-wrapper">
+        <StackLayout class="dialog">
+            <Label class="h3" textWrap="true" text="Stop timer and spend time"></Label>
+
+            <Button class="btn btn-primary" text="Spend" (tap)="stop()"></Button>
+            <Button class="btn btn-outline" text="Cancel" (tap)="this.dialogOpen = false"></Button>
+        </StackLayout>
+    </AbsoluteLayout>
+</GridLayout>
