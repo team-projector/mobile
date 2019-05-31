@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { RouterExtensions } from 'nativescript-angular';
 import { finalize } from 'rxjs/operators';
-import * as app from 'tns-core-modules/application';
+import { Page } from 'tns-core-modules/ui/page';
 import { IssuesManager } from '~/app/managers/issues.manager';
 import { Issue, WorkingIssue } from '~/app/models/issue';
 import { IssuesService } from '~/app/services/issues.service';
@@ -40,10 +40,13 @@ export class IssueDetailComponent implements OnInit {
 
     constructor(private issuesService: IssuesService,
                 private route: ActivatedRoute,
+                private router: RouterExtensions,
+                private page: Page,
                 public issuesManager: IssuesManager) {
     }
 
     ngOnInit() {
+        this.page.actionBarHidden = true;
         this.route.params.subscribe(({id}) => this.id = id);
         setInterval(() => this.now = new Date(), 1000);
     }
@@ -65,8 +68,10 @@ export class IssueDetailComponent implements OnInit {
         this.issuesManager.stop(this.id);
     }
 
-    onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();
+    toList(): void {
+        this.router.navigate(['/issues'], {
+            animated: true,
+            transition: {name: 'slideRight', duration: 200, curve: 'easeIn'}
+        });
     }
 }

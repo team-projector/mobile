@@ -1,26 +1,25 @@
-<ActionBar title="loading ? 'Loading...' : issue?.title" class="action-bar">
-    <FlexboxLayout justifyContent="flex-start">
-        <GridLayout row="0" columns="auto, *">
-            <Label col="0" text="&#xf0c9;" class="fa menu-icon" (tap)="onDrawerButtonTap()"></Label>
-        </GridLayout>
-    </FlexboxLayout>
-</ActionBar>
-
 <FlexboxLayout horizontalAlignment="center" verticalAlignment="center">
     <ActivityIndicator [busy]="loading" class="activity-indicator" loading></ActivityIndicator>
 </FlexboxLayout>
 
-<StackLayout *ngIf="!!issue" orientation="vertical" detail>
-    <Label [text]="'Time spent: ' + ((issue.timeSpent | duration) || '&#xf254;')" class="fa label"></Label>
-    <Label [text]="'Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')" class="fa label"></Label>
-    <Label [text]="'&#xf017; ' + (!!working ? (working.start | diff:now | duration) : '&#xf068;')" class="fa label">
-    </Label>
-    <FlexboxLayout flexDirection="column" verticalAlignment="top" actions horizontalAlignment="center">
-        <Button *ngIf="!working; else stopTemp" text="&#xf04b;" horizontalAlignment="center" (tap)="play()"
-                class="fa play">
-        </Button>
-        <ng-template #stopTemp>
-            <Button text="&#xf04d;" horizontalAlignment="center" (tap)="stop()" class="fa stop"></Button>
-        </ng-template>
-    </FlexboxLayout>
+<StackLayout>
+    <Label [text]="issue?.title" title></Label>
+    <StackLayout *ngIf="!!issue" orientation="vertical" detail>
+        <Label [text]="'$ Time spent: ' + ((issue.timeSpent | duration) || '&#xf068;')" class="fa label">
+        </Label>
+        <Label [text]="'&#xf254; Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')"
+               class="fa label">
+        </Label>
+        <Label [text]="'&#xf017; Timer: ' + (!!working ? (working.start | diff:now | duration) : '&#xf068;')"
+               class="fa label">
+        </Label>
+        <FlexboxLayout flexDirection="column" verticalAlignment="top" actions horizontalAlignment="center">
+            <Button *ngIf="!working; else stopTemp" text="&#xf04b;" horizontalAlignment="center" (tap)="play()"
+                    class="fa play">
+            </Button>
+            <ng-template #stopTemp>
+                <Button text="&#xf04d;" horizontalAlignment="center" (tap)="stop()" class="fa stop"></Button>
+            </ng-template>
+        </FlexboxLayout>
+    </StackLayout>
 </StackLayout>

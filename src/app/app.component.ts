@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
-import * as app from 'tns-core-modules/application';
-import { AppConfig } from '~/app-config';
+import { Component, OnInit } from '@angular/core';
+import { RouterExtensions } from 'nativescript-angular';
 import { MeManager } from '~/app/managers/me.manager';
 
 @Component({
@@ -9,15 +7,26 @@ import { MeManager } from '~/app/managers/me.manager';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+    private _current: string;
 
-    constructor(private config: AppConfig,
+    set current(current: string) {
+        this._current = current;
+        this.router.navigate([current], {
+            animated: true,
+            transition: {name: 'curl', duration: 200, curve: 'easeIn'}
+        });
+    }
+
+    get current() {
+        return this._current;
+    }
+
+    constructor(private router: RouterExtensions,
                 public me: MeManager) {
     }
 
-    logout(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.closeDrawer();
-        this.config.authorization = null;
+    ngOnInit() {
+        this.current = 'issues';
     }
 }

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular';
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import { finalize } from 'rxjs/operators';
-import * as app from 'tns-core-modules/application';
-import { ios } from 'tns-core-modules/application';
 import { ItemEventData } from 'tns-core-modules/ui/list-view';
+import { Page } from 'tns-core-modules/ui/page';
 import { IssuesManager } from '~/app/managers/issues.manager';
 import { MeManager } from '~/app/managers/me.manager';
 import { IssueCard, IssuesFilter, IssueState } from '~/app/models/issue';
@@ -21,7 +19,6 @@ export class IssuesComponent implements OnInit {
 
     private _user: Me;
     issues: IssueCard[] = [];
-    transitions: string[] = [];
     loading = false;
 
     set user(user: Me) {
@@ -41,17 +38,13 @@ export class IssuesComponent implements OnInit {
     constructor(private issuesService: IssuesService,
                 private router: RouterExtensions,
                 private route: ActivatedRoute,
+                private page: Page,
                 public issuesManager: IssuesManager,
                 public me: MeManager) {
     }
 
     ngOnInit(): void {
-        if (ios) {
-            this.transitions = ['curl', 'curlDown', 'fade', 'flip', 'flipLeft', 'slide', 'slideRight', 'slideTop', 'slideBottom'];
-        } else {
-            this.transitions = ['explode', 'fade', 'flip', 'flipLeft', 'slide', 'slideRight', 'slideTop', 'slideBottom'];
-        }
-
+        this.page.actionBarHidden = true;
         this.loading = true;
         this.me.user$.pipe(finalize(() => this.loading = false))
             .subscribe(user => this.user = user);
@@ -71,10 +64,5 @@ export class IssuesComponent implements OnInit {
             animated: true,
             transition: {name: 'slide', duration: 200, curve: 'easeIn'}
         });
-    }
-
-    onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();
     }
 }
