@@ -1,26 +1,19 @@
-[loading] {
-  width: 200;
-  height: 200;
-  color: lightgray;
-}
-
-[page] {
+[detail] {
   padding: 10;
+  font-size: 20;
 
-  [label] {
-    font-family: "FontAwesome 5 Free", "fa-regular-400", "fa-solid-900";
-    font-size: 20;
+  .label {
+    margin-bottom: 10;
   }
 
   [actions] {
     padding: 10;
 
-    [play], [stop] {
-      width: 140;
-      height: 140;
+    .play, .stop {
+      width: 100;
+      height: 100;
       border-radius: 100;
-      font-family: "FontAwesome 5 Free", "fa-regular-400", "fa-solid-900";
-      font-size: 90;
+      font-size: 50;
       vertical-align: middle;
     }
   }

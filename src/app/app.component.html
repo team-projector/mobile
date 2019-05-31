@@ -1,1 +1,16 @@
-<page-router-outlet></page-router-outlet>
+<RadSideDrawer drawerTransition="PushTransition">
+
+    <GridLayout tkDrawerContent class="sidedrawer-left">
+        <StackLayout class="sidedrawer-header" orientation="vertical"
+                     horizontalAlignment="stretch" verticalAlignment="top">
+            <Image [src]="me.user?.avatar" avatar horizontalAlignment="center"></Image>
+            <Label [text]="me.user?.name" name horizontalAlignment="center"></Label>
+        </StackLayout>
+
+        <StackLayout verticalAlignment="bottom">
+            <Button text="Logout" (tap)="logout()" logout></Button>
+        </StackLayout>
+    </GridLayout>
+
+    <page-router-outlet tkMainContent></page-router-outlet>
+</RadSideDrawer>

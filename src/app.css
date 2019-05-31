@@ -18,3 +18,28 @@ components that have the btn class name.
 .btn {
     font-size: 18;
 }
+
+.fa {
+    font-family: "FontAwesome";
+}
+
+.action-bar {
+    background-color: #48b1ec;
+}
+
+.menu-icon {
+    font-size: 26;
+    color: white;
+    padding-left: 13;
+    vertical-align: center;
+}
+
+.ab-icon {
+    color: white;
+}
+
+[loading] {
+    width: 200;
+    height: 200;
+    color: lightgray;
+}

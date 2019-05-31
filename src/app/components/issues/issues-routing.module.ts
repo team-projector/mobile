@@ -5,8 +5,14 @@ import { IssueDetailComponent } from '~/app/components/issues/issue-detail/issue
 import { IssuesComponent } from '~/app/components/issues/issues.component';
 
 const routes: Routes = [
-    {path: '', component: IssuesComponent},
-    {path: ':id', component: IssueDetailComponent}
+    {
+        path: '',
+        component: IssuesComponent
+    },
+    {
+        path: ':id',
+        component: IssueDetailComponent
+    }
 ];
 
 @NgModule({

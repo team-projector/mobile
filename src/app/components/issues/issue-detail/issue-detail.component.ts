@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import { finalize } from 'rxjs/operators';
+import * as app from 'tns-core-modules/application';
 import { IssuesManager } from '~/app/managers/issues.manager';
 import { Issue, WorkingIssue } from '~/app/models/issue';
 import { IssuesService } from '~/app/services/issues.service';
@@ -17,7 +19,6 @@ export class IssueDetailComponent implements OnInit {
 
     issue: Issue;
     loading = false;
-    playing = false;
     now = new Date();
 
     set id(id: number) {
@@ -31,7 +32,6 @@ export class IssueDetailComponent implements OnInit {
 
     set working(working: WorkingIssue) {
         this._working = working;
-        this.playing = !!working;
     }
 
     get working() {
@@ -62,7 +62,11 @@ export class IssueDetailComponent implements OnInit {
 
     stop(): void {
         this.working = null;
-        console.log(this.id);
         this.issuesManager.stop(this.id);
+    }
+
+    onDrawerButtonTap(): void {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.showDrawer();
     }
 }
