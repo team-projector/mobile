@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { RouterExtensions } from 'nativescript-angular';
 import { Observable, of } from 'rxjs';
 import { AppConfig } from '~/app-config';
 
@@ -8,7 +9,7 @@ import { AppConfig } from '~/app-config';
 export class AuthorizationGuard implements CanActivate {
 
     constructor(public config: AppConfig,
-                private router: Router) {
+                private router: RouterExtensions) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {

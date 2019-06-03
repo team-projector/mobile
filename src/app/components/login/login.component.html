@@ -1,17 +1,23 @@
 <FlexboxLayout class="page">
-    <StackLayout class="form">
-        <Image class="logo" src="~/images/logo.png"></Image>
+    <ng-template #load>
+        <FlexboxLayout horizontalAlignment="center" verticalAlignment="center">
+            <ActivityIndicator [busy]="loading" class="activity-indicator" loading></ActivityIndicator>
+        </FlexboxLayout>
+    </ng-template>
+
+    <StackLayout *ngIf="!loading; else load" class="form">
+        <!--        <Image class="logo" src="~/images/logo.png"></Image>-->
         <Label class="header" text="Team Projector"></Label>
 
-        <StackLayout class="input-field">
-            <TextField hint="Login" [(ngModel)]="credentials.login"></TextField>
+        <StackLayout class="input-field fa">
+            <TextField hint="&#xf007; Login" [(ngModel)]="credentials.login"></TextField>
         </StackLayout>
 
-        <StackLayout class="input-field">
-            <TextField hint="Password" [(ngModel)]="credentials.password"></TextField>
+        <StackLayout class="input-field fa">
+            <TextField hint="&#xf084; Password" [(ngModel)]="credentials.password"></TextField>
         </StackLayout>
 
-        <Button [text]="'Log In'" (tap)="login()"></Button>
-        <Button [text]="'Log In with Gitlab'" (tap)="gitlab()"></Button>
+        <Button text="Signin &#xf090;" (tap)="login()" class="fa" login>
+        </Button>
     </StackLayout>
 </FlexboxLayout>

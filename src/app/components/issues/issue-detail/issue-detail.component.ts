@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RouterExtensions } from 'nativescript-angular';
 import { finalize } from 'rxjs/operators';
+import { Page } from 'tns-core-modules/ui/page';
 import { IssuesManager } from '~/app/managers/issues.manager';
 import { Issue, WorkingIssue } from '~/app/models/issue';
 import { IssuesService } from '~/app/services/issues.service';
@@ -17,8 +19,8 @@ export class IssueDetailComponent implements OnInit {
 
     issue: Issue;
     loading = false;
-    playing = false;
     now = new Date();
+    dialogOpen = false;
 
     set id(id: number) {
         this._id = id;
@@ -31,7 +33,6 @@ export class IssueDetailComponent implements OnInit {
 
     set working(working: WorkingIssue) {
         this._working = working;
-        this.playing = !!working;
     }
 
     get working() {
@@ -40,10 +41,13 @@ export class IssueDetailComponent implements OnInit {
 
     constructor(private issuesService: IssuesService,
                 private route: ActivatedRoute,
+                private router: RouterExtensions,
+                private page: Page,
                 public issuesManager: IssuesManager) {
     }
 
     ngOnInit() {
+        this.page.actionBarHidden = true;
         this.route.params.subscribe(({id}) => this.id = id);
         setInterval(() => this.now = new Date(), 1000);
     }
@@ -62,7 +66,7 @@ export class IssueDetailComponent implements OnInit {
 
     stop(): void {
         this.working = null;
-        console.log(this.id);
         this.issuesManager.stop(this.id);
+        this.dialogOpen = false;
     }
 }

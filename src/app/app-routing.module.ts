@@ -17,6 +17,11 @@ const routes: Routes = [
         path: 'issues',
         loadChildren: '~/app/components/issues/issues.module#IssuesModule',
         canActivate: [AuthorizationGuard]
+    },
+    {
+        path: 'profile',
+        loadChildren: '~/app/components/profile/profile.module#ProfileModule',
+        canActivate: [AuthorizationGuard]
     }
 ];
 
