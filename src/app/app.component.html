@@ -1,1 +1,13 @@
-<page-router-outlet></page-router-outlet>
+<GridLayout class="page" rows="*, 70" columns="*">
+
+    <page-router-outlet></page-router-outlet>
+
+    <GridLayout *ngIf="me.logged" row="1" rows="*" columns="*, *">
+        <Button [class]="current === 'issues' ? 'active' : ''" (tap)="current = 'issues'"
+                text="&#xf03a;" col="0" class="fa" action>
+        </Button>
+        <Button [class]="current === 'profile' ? 'active' : ''" (tap)="current = 'profile'"
+                text="&#xf007;" col="1" class="fa" action>
+        </Button>
+    </GridLayout>
+</GridLayout>

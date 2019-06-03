@@ -1,18 +1,36 @@
-<ActionBar [title]="loading ? 'Loading...' : issue?.title" class="action-bar"></ActionBar>
-
-<flexbox-layout horizontalAlignment="center" verticalAlignment="center">
+<FlexboxLayout horizontalAlignment="center" verticalAlignment="center">
     <ActivityIndicator [busy]="loading" class="activity-indicator" loading></ActivityIndicator>
-</flexbox-layout>
+</FlexboxLayout>
 
-<StackLayout *ngIf="!!issue" orientation="vertical" page>
-    <Label [text]="'Time spent: ' + ((issue.timeSpent | duration) || '&#xf254;')" label></Label>
-    <Label [text]="'Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')" label></Label>
+<GridLayout class="page" [class.dialogOpen]="dialogOpen">
+    <StackLayout *ngIf="!!issue" orientation="vertical" content>
+        <Label [text]="issue.title" title></Label>
+        <Label [text]="'$ Time spent: ' + ((issue.timeSpent | duration) || '&#xf068;')" class="fa label">
+        </Label>
+        <Label [text]="'&#xf254; Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')"
+               class="fa label">
+        </Label>
+        <Label [text]="'&#xf017; Timer: ' + (!!working ? (working.start | diff:now | duration) : '&#xf068;')"
+               class="fa label">
+        </Label>
+        <FlexboxLayout flexDirection="column" verticalAlignment="top" actions horizontalAlignment="center">
+            <Button *ngIf="!working; else stopTemp" text="&#xf04b;" horizontalAlignment="center" (tap)="play()"
+                    class="fa play">
+            </Button>
+            <ng-template #stopTemp>
+                <Button text="&#xf04d;" horizontalAlignment="center" (tap)="this.dialogOpen = true"
+                        class="fa stop">
+                </Button>
+            </ng-template>
+        </FlexboxLayout>
+    </StackLayout>
 
-    <FlexboxLayout flexDirection="column" horizontalAlignment="center" verticalAlignment="top" actions>
-        <Label *ngIf="!!working" [text]="working.start | diff:now | duration" label></Label>
-        <Button *ngIf="!playing; else stopTemp" text="&#xf144;" horizontalAlignment="center" (tap)="play()" play></Button>
-        <ng-template #stopTemp>
-            <Button text="&#xf28d;" horizontalAlignment="center" (tap)="stop()" stop></Button>
-        </ng-template>
-    </FlexboxLayout>
-</StackLayout>
+    <AbsoluteLayout class="dialog-wrapper">
+        <StackLayout class="dialog">
+            <Label class="h3" textWrap="true" text="Stop timer and spend time"></Label>
+
+            <Button class="btn btn-primary" text="Spend" (tap)="stop()"></Button>
+            <Button class="btn btn-outline" text="Cancel" (tap)="this.dialogOpen = false"></Button>
+        </StackLayout>
+    </AbsoluteLayout>
+</GridLayout>
