@@ -6,9 +6,9 @@
         </StackLayout>
 
         <StackLayout orientation="vertical" row="1" verticalAlignment="center">
-            <Label [text]="'Opened issues: ' + me.user?.metrics.issuesOpenedCount" label></Label>
-            <Label [text]="'Payroll closed: ' + me.user?.metrics.payrollClosed" label></Label>
-            <Label [text]="'Payroll opened: ' + me.user?.metrics.payrollOpened" label></Label>
+            <Label [text]="'Opened ' + me.user?.metrics.issuesOpenedCount + ' issues'" label></Label>
+            <Label [text]="'Payroll closed: ' + me.user?.metrics.payrollClosed + '&#8381;'" label></Label>
+            <Label [text]="'Payroll opened: ' + me.user?.metrics.payrollOpened + '&#8381;'" label></Label>
         </StackLayout>
 
         <Button row="2" text="Logout &#xf08b;" (tap)="logout()" logout class="fa"></Button>
