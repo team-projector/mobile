@@ -75,8 +75,8 @@ export class IssueDetailComponent implements OnInit {
     }
 
     load() {
-        this.working = this.issuesManager.get(this.id);
         this.loading = true;
+        this.working = this.issuesManager.get(this.id);
         this.issuesService.get(this.id).pipe(finalize(() => this.loading = false))
             .subscribe(issue => this.issue = issue);
     }
@@ -91,6 +91,7 @@ export class IssueDetailComponent implements OnInit {
         this.working = null;
         this.issuesManager.stop(this.id);
         this.dialogOpen = false;
+        this.load();
     }
 
     open() {
