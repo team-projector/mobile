@@ -4,10 +4,10 @@
 
     <GridLayout *ngIf="me.logged" row="1" rows="*" columns="*, *">
         <Button [class]="current === 'issues' ? 'active' : ''" (tap)="current = 'issues'"
-                text="&#xf03a;" col="0" class="fa" action>
+                text="&#xf03a;" col="0" action>
         </Button>
         <Button [class]="current === 'profile' ? 'active' : ''" (tap)="current = 'profile'"
-                text="&#xf007;" col="1" class="fa" action>
+                text="&#xf007;" col="1" action>
         </Button>
     </GridLayout>
 </GridLayout>

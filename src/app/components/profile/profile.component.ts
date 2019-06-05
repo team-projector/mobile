@@ -6,8 +6,7 @@ import { MeManager } from '~/app/managers/me.manager';
 @Component({
     selector: 'ns-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
-    moduleId: module.id
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

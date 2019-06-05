@@ -5,20 +5,20 @@
 <GridLayout class="page" [class.dialogOpen]="dialogOpen">
     <StackLayout *ngIf="!!issue" orientation="vertical" content>
         <Label [text]="issue.title" title></Label>
-        <Label [text]="'$ Time spent: ' + ((issue.timeSpent | duration) || '&#xf068;')" class="fa label">
+        <Label [text]="'Time spent: ' + ((issue.timeSpent | duration) || '&#8212;')" class="label">
         </Label>
-        <Label [text]="'&#xf254; Time estimate: ' + ((issue.timeEstimate | duration) || '&#xf254;')"
-               class="fa label">
+        <Label [text]="'Time estimate: ' + ((issue.timeEstimate | duration) || '&#8212;')"
+               class="label">
         </Label>
-        <Label [text]="'&#xf017; Timer: ' + (!!working ? (working.start | diff:now | duration) : '&#xf068;')"
-               class="fa label">
+        <Label [text]="'Timer: ' + (!!working ? spent : '&#8212;')"
+               class="label">
         </Label>
         <FlexboxLayout flexDirection="column" verticalAlignment="top" actions horizontalAlignment="center">
-            <Button *ngIf="!working; else stopTemp" text="&#xf04b;" horizontalAlignment="center" (tap)="play()"
+            <Button *ngIf="!working; else stopTemp" text="&#xf04b;" (tap)="play()"
                     class="fa play">
             </Button>
             <ng-template #stopTemp>
-                <Button text="&#xf04d;" horizontalAlignment="center" (tap)="this.dialogOpen = true"
+                <Button text="&#xf04d;" (tap)="open()"
                         class="fa stop">
                 </Button>
             </ng-template>
@@ -28,9 +28,9 @@
     <AbsoluteLayout class="dialog-wrapper">
         <StackLayout class="dialog">
             <Label class="h3" textWrap="true" text="Stop timer and spend time"></Label>
-
+            <TextField hint="Spend time" [(ngModel)]="spent"></TextField>
             <Button class="btn btn-primary" text="Spend" (tap)="stop()"></Button>
-            <Button class="btn btn-outline" text="Cancel" (tap)="this.dialogOpen = false"></Button>
+            <Button class="btn btn-outline" text="Cancel" (tap)="cancel()"></Button>
         </StackLayout>
     </AbsoluteLayout>
 </GridLayout>

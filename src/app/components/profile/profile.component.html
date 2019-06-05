@@ -1,10 +1,16 @@
 <GridLayout>
-    <StackLayout orientation="vertical" horizontalAlignment="stretch" verticalAlignment="center">
-        <Image [src]="me.user?.avatar" avatar horizontalAlignment="center"></Image>
-        <Label [text]="me.user?.name" name horizontalAlignment="center"></Label>
-    </StackLayout>
+    <GridLayout rows="*,*,60" horizontalAlignment="stretch">
+        <StackLayout orientation="vertical">
+            <Image [src]="me.user?.avatar" avatar horizontalAlignment="center"></Image>
+            <Label [text]="me.user?.name" name horizontalAlignment="center"></Label>
+        </StackLayout>
 
-    <StackLayout verticalAlignment="bottom">
-        <Button text="Logout &#xf08b;" (tap)="logout()" logout class="fa"></Button>
-    </StackLayout>
+        <StackLayout orientation="vertical" row="1" verticalAlignment="center">
+            <Label [text]="'Opened issues: ' + me.user?.metrics.issuesOpenedCount" label></Label>
+            <Label [text]="'Payroll closed: ' + me.user?.metrics.payrollClosed" label></Label>
+            <Label [text]="'Payroll opened: ' + me.user?.metrics.payrollOpened" label></Label>
+        </StackLayout>
+
+        <Button row="2" text="Logout &#xf08b;" (tap)="logout()" logout class="fa"></Button>
+    </GridLayout>
 </GridLayout>
