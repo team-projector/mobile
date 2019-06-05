@@ -14,10 +14,11 @@
                     <Label *ngIf="!!issuesManager.get(issue['id'])" text="&#xf04b;" class="fa"
                            verticalAlignment="center"></Label>
                 </FlexboxLayout>
-                <FlexboxLayout flexDirection="row" justifyContent="space-between" class="list-group-item-text">
+                <FlexboxLayout flexDirection="row" class="list-group-item-text" alignItems="center">
                     <Label class="fa"
                            [text]="!!issue['timeEstimate'] ? ('Estimate: ' + (issue['timeEstimate'] | duration)) : ''">
                     </Label>
+                    <Label *ngIf="!!issue['timeEstimate'] && !!issue['timeSpent']" text=" / "></Label>
                     <Label class="fa"
                            [text]="!!issue['timeSpent'] ? ('Spent: ' + (issue['timeSpent'] | duration)) : ''">
                     </Label>
