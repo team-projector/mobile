@@ -3,6 +3,7 @@ import { RouterExtensions } from 'nativescript-angular';
 import { finalize } from 'rxjs/operators';
 import { Page } from 'tns-core-modules/ui/page';
 import { AppConfig } from '~/app-config';
+import { MeManager } from '~/app/managers/me.manager';
 import { UserCredentials } from '~/app/models/user-credentials';
 import { UsersService } from '~/app/services/users.service';
 
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     constructor(private usersService: UsersService,
                 private page: Page,
                 private config: AppConfig,
-                private router: RouterExtensions) {
+                private router: RouterExtensions,
+                public me: MeManager) {
     }
 
     ngOnInit() {

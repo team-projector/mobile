@@ -10,14 +10,20 @@
         <Label class="header" text="Team Projector"></Label>
 
         <StackLayout class="input-field fa">
-            <TextField hint="&#xf007; Login" [(ngModel)]="credentials.login"></TextField>
+            <TextField hint="&#xf007; Login" [(ngModel)]="credentials.login"
+                       returnKeyType="next" (returnPress)="password.focus()">
+            </TextField>
         </StackLayout>
 
         <StackLayout class="input-field fa">
-            <TextField hint="&#xf084; Password" [(ngModel)]="credentials.password"></TextField>
+            <TextField #password hint="&#xf084; Password"
+                       [(ngModel)]="credentials.password" secure="true"
+                       [returnKeyType]="me.logged ? 'done' : 'next'"
+                       (returnPress)="confirm.focus()">
+            </TextField>
         </StackLayout>
 
-        <Button text="Signin &#xf090;" (tap)="login()" class="fa" login>
+        <Button #confirm text="Signin &#xf090;" (tap)="login()" class="fa" login>
         </Button>
     </StackLayout>
 </FlexboxLayout>
