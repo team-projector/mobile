@@ -1,13 +1,12 @@
 .page {
   align-items: center;
   flex-direction: column;
-  padding: 20;
+  padding: 5 30;
 }
 
 .form {
   flex-grow: 2;
   vertical-align: middle;
-  width: 300;
 }
 
 .logo {
@@ -25,17 +24,7 @@
   color: darkgray;
 }
 
-.input-field {
-  margin-bottom: 25;
-}
-
 .input {
   font-size: 18;
   placeholder-color: #A8A8A8;
-}
-
-[login] {
-  border-radius: 50;
-  margin: 10;
-  background-color: whitesmoke;
 }

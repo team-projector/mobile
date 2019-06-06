@@ -5,7 +5,7 @@
         </FlexboxLayout>
     </ng-template>
 
-    <StackLayout *ngIf="!loading; else load" class="form">
+    <StackLayout *ngIf="!loading; else load" class="form" alignSelf="stretch">
         <!--        <Image class="logo" src="~/images/logo.png"></Image>-->
         <Label class="header" text="Team Projector"></Label>
 
@@ -23,7 +23,8 @@
             </TextField>
         </StackLayout>
 
-        <Button #confirm text="Signin &#xf090;" (tap)="login()" class="fa" login>
-        </Button>
+        <StackLayout>
+            <Button #confirm text="Signin &#xf090;" (tap)="login()" class="fa btn btn-primary btn-rounded-lg"></Button>
+        </StackLayout>
     </StackLayout>
 </FlexboxLayout>
