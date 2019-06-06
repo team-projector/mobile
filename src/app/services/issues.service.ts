@@ -24,4 +24,8 @@ export class IssuesService {
             .pipe(map(obj => deserialize(obj, Issue)));
     }
 
+    spend(id: number, time: number): Observable<Issue> {
+        return this.http.post(`issues/${id}/spend`, {time: time})
+            .pipe(map(obj => deserialize(obj, Issue)));
+    }
 }

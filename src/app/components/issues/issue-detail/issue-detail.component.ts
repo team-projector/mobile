@@ -91,7 +91,8 @@ export class IssueDetailComponent implements OnInit {
         this.working = null;
         this.issuesManager.stop(this.id);
         this.dialogOpen = false;
-        this.load();
+        this.issuesService.spend(this.id, this.parse())
+            .subscribe(issue => this.issue = issue);
     }
 
     open() {
@@ -102,5 +103,19 @@ export class IssueDetailComponent implements OnInit {
     cancel() {
         this.start();
         this.dialogOpen = false;
+    }
+
+    parse() {
+        const parts = this.spent.split(' ');
+        const times = ['s', 'm', 'h', 'd'];
+        let seconds = 0;
+
+        parts.forEach(part => {
+            const index = times.findIndex(time => part.indexOf(time) > -1);
+            if (index > -1) {
+                seconds += +part.replace(/\D+/, '') * Math.pow(60, index);
+            }
+        });
+        return seconds;
     }
 }
