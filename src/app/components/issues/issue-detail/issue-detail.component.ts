@@ -88,9 +88,7 @@ export class IssueDetailComponent implements OnInit {
     }
 
     stop(): void {
-        this.working = null;
-        this.issuesManager.stop(this.id);
-        this.dialogOpen = false;
+        this.clear();
         this.issuesService.spend(this.id, this.parse())
             .subscribe(issue => this.issue = issue);
     }
@@ -102,6 +100,13 @@ export class IssueDetailComponent implements OnInit {
 
     cancel() {
         this.start();
+        this.dialogOpen = false;
+    }
+
+    clear() {
+        this.working = null;
+        clearInterval(this.interval);
+        this.issuesManager.stop(this.id);
         this.dialogOpen = false;
     }
 
